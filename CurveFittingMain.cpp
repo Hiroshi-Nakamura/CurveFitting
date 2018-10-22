@@ -34,37 +34,63 @@ int main(int argc, char** argv)
             std::cout << "---Line Fitting---" << std::endl;
             LineFitting line_fit(x,y);
 
-            Eigen::VectorXd x_val(2);
+            Eigen::VectorXd x_val(line_fit.num_param());
             x_val.setOnes();
             line_fit.solve(x_val);
             std::cout << x_val << std::endl;
 
-            std::vector<double> vec_x(x_val.data(),x_val.data()+2);
+            std::vector<double> vec_x(x_val.data(),x_val.data()+line_fit.num_param());
             std::cout << "residual(vec_x)=" << line_fit.residual(vec_x) << std::endl;
         }
+
+        {
+            std::cout << "---Polynomial Fitting---" << std::endl;
+            PolynomialFitting poly_fit(x,y,3);
+
+            Eigen::VectorXd x_val(poly_fit.num_param());
+            x_val.setOnes();
+            poly_fit.solve(x_val);
+            std::cout << x_val << std::endl;
+
+            std::vector<double> vec_x(x_val.data(),x_val.data()+poly_fit.num_param());
+            std::cout << "residual(vec_x)=" << poly_fit.residual(vec_x) << std::endl;
+        }
+
         {
             std::cout << "---Catenary Fitting---" << std::endl;
             CatenaryFitting catenary_fit(x,y);
 
-            Eigen::VectorXd x_val(3);
-            x_val << 8.0, 19.0, 40.0;
+            Eigen::VectorXd x_val(catenary_fit.num_param());
+            x_val << 3.5, 9.5, -20.0;
             catenary_fit.solve(x_val);
             std::cout << x_val << std::endl;
 
-            std::vector<double> vec_x(x_val.data(),x_val.data()+3);
+            std::vector<double> vec_x(x_val.data(),x_val.data()+catenary_fit.num_param());
             std::cout << "residual(vec_x)=" << catenary_fit.residual(vec_x) << std::endl;
         }
         {
             std::cout << "---Exponential Fitting---" << std::endl;
             ExponentialFitting exponential_fit(x,y);
 
-            Eigen::VectorXd x_val(4);
+            Eigen::VectorXd x_val(exponential_fit.num_param());
             x_val << 10.0, 2.0, 0.0, 0.0;
             exponential_fit.solve(x_val);
             std::cout << x_val << std::endl;
 
-            std::vector<double> vec_x(x_val.data(),x_val.data()+3);
+            std::vector<double> vec_x(x_val.data(),x_val.data()+exponential_fit.num_param());
             std::cout << "residual(vec_x)=" << exponential_fit.residual(vec_x) << std::endl;
+        }
+        {
+            std::cout << "---InvCycloid Fitting---" << std::endl;
+            InvCycloidFitting invCycloid_fit(y,x); /// Inv -> x y exchanging!
+
+            Eigen::VectorXd x_val(invCycloid_fit.num_param());
+            x_val << -2.5, 0.0, 0.0;
+            invCycloid_fit.solve(x_val);
+            std::cout << x_val << std::endl;
+
+            std::vector<double> vec_x(x_val.data(),x_val.data()+invCycloid_fit.num_param());
+            std::cout << "residual(vec_x)=" << invCycloid_fit.residual(vec_x) << std::endl;
         }
     }catch(std::string message){
         std::cout << message << std::endl;
