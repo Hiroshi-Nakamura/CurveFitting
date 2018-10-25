@@ -1,6 +1,6 @@
 # CurveFitting
 Curve fitting by using of Minimization.
-Basic class is CurveFitting, but it is vitual class, you cannot use itself. 
+Basic class is CurveFitting, but it is vitual class, which you cannot use itself. 
 You can use some derived classes already prepared, Line, Polynomial, Catenary, Exponential, InvCycloid.
 Or you can create a derive class from "CurveFitting" class.
 
