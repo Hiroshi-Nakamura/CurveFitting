@@ -10,7 +10,7 @@ Next, prepare `std::vector<double>` as initial values of curve equation paramete
 Last, call `solve()` function. Its argument will be updated to the solution.
 
 In the case of creating a new derived class, you should define its `model()` function.
-Because template class cannot be vitrual class, you should define 2 types of model() function.
+Because template class cannot be vitrual class, you should define 2 types of `model()` function.
 One is for `AutomaticDifferentiation::FuncPtr<double>`, the other is for `double`.
 Their return will be the curve equation, to which you want to fit the sample data.
 Additionally, you need to define `num_param()`, 
