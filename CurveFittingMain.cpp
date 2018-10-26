@@ -47,26 +47,22 @@ int main(int argc, char** argv)
             std::cout << "---Polynomial Fitting---" << std::endl;
             PolynomialFitting poly_fit(x,y,3);
 
-            Eigen::VectorXd x_val(poly_fit.num_param());
-            x_val.setOnes();
+            std::vector<double> x_val(poly_fit.num_param(),1.0);
             poly_fit.solve(x_val);
-            std::cout << x_val << std::endl;
+            std::cout << Eigen::Map<Eigen::VectorXd>(x_val.data(),x_val.size()) << std::endl;
 
-            std::vector<double> vec_x(x_val.data(),x_val.data()+poly_fit.num_param());
-            std::cout << "residual(vec_x)=" << poly_fit.residual(vec_x) << std::endl;
+            std::cout << "residual(x_val)=" << poly_fit.residual(x_val) << std::endl;
         }
 
         {
             std::cout << "---Catenary Fitting---" << std::endl;
             CatenaryFitting catenary_fit(x,y);
 
-            Eigen::VectorXd x_val(catenary_fit.num_param());
-            x_val << 3.5, 9.5, -20.0;
+            std::vector<double> x_val{3.5, 9.5, -20.0};
             catenary_fit.solve(x_val);
-            std::cout << x_val << std::endl;
+            std::cout << Eigen::Map<Eigen::VectorXd>(x_val.data(),x_val.size()) << std::endl;
 
-            std::vector<double> vec_x(x_val.data(),x_val.data()+catenary_fit.num_param());
-            std::cout << "residual(vec_x)=" << catenary_fit.residual(vec_x) << std::endl;
+            std::cout << "residual(x_val)=" << catenary_fit.residual(x_val) << std::endl;
         }
         {
             std::cout << "---Exponential Fitting---" << std::endl;

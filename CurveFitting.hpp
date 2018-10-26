@@ -32,6 +32,14 @@ public:
             [this](const std::vector<AutomaticDifferentiation::FuncPtr<double>> param){ return residual(param); },
             x_val);
     }
+
+    bool solve(std::vector<double>& x_val)
+    {
+        Eigen::VectorXd x_val_eigen=Eigen::Map<Eigen::VectorXd> (x_val.data(), x_val.size());
+        bool rtn=solve(x_val_eigen);
+        x_val.assign(x_val_eigen.data(),x_val_eigen.data()+x_val.size());
+        return rtn;
+    }
 };
 
 using FittingPtr=std::shared_ptr<CurveFitting>;
