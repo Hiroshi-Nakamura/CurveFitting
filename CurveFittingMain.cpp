@@ -81,7 +81,7 @@ int main(int argc, char** argv)
             InvCycloidFitting invCycloid_fit(y,x); /// Inv -> x y exchanging!
 
             Eigen::VectorXd x_val(invCycloid_fit.num_param());
-            x_val << -2.5, 0.0, 0.0;
+            x_val << 3.0, 0.0, 0.0;
             invCycloid_fit.solve(x_val);
             std::cout << x_val << std::endl;
 
